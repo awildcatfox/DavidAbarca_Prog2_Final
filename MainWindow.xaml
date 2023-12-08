@@ -19,26 +19,40 @@
         <ListView
             x:Name="lvTasks"
             Height="230"
-            Width="226"
+            Width="375"
             d:ItemsSource="{d:SampleData ItemCount=5}"
             Canvas.Top="153"
-            Canvas.Left="64"
+            Canvas.Left="25"
             HorizontalAlignment="Left"
-            VerticalAlignment="Center">
+            VerticalAlignment="Center"
+            SelectionChanged="lvTasks_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn 
+                    <GridViewColumn
                         Header="Complete"
-                        DisplayMemberBinding="{Binding Complete}"
-                        />
+                        DisplayMemberBinding="{Binding Complete}" />
+                    <GridViewColumn
+                        Header="Name"
+                        DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn
+                        Header="Importance"
+                        DisplayMemberBinding="{Binding Importance}" />
+                    <GridViewColumn
+                        Header="Time Sensitive"
+                        DisplayMemberBinding="{Binding Time}" />
+                    <GridViewColumn
+                        Header="Description"
+                        DisplayMemberBinding="{Binding Description}" />
                 </GridView>
             </ListView.View>
         </ListView>
         <RichTextBox
             Height="240"
-            Width="408"
-            Canvas.Left="365"
-            Canvas.Top="143">
+            Width="266"
+            Canvas.Left="507"
+            Canvas.Top="143"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center">
             <FlowDocument>
                 <Paragraph>
                     <Run

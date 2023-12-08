@@ -41,10 +41,19 @@ namespace DavidAbarca_Prog2_Final
 
         } // main window
 
-            //Tasks Homework = new Tasks(false, "homework", true, true, "Programming GA");
+        //Tasks Homework = new Tasks(false, "homework", true, true, "Programming GA");
 
-            
-        
+        private void lvTasks_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            int selectedIndex = lvTasks.SelectedIndex;
+
+            rtbDisplay.Text = _tasks[selectedIndex].DisplayInformation();
+
+
+
+        }
+
 
         public void Preload()
         {
@@ -73,7 +82,6 @@ namespace DavidAbarca_Prog2_Final
             };
         }// preload
 
-
-
+      
     }
 }
