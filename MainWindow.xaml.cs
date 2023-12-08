@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 
 namespace DavidAbarca_Prog2_Final
 {
+    // Section 1 : Name Example
     // David Abarca
     // 12.7.2023
     // Programming 2 Final
@@ -27,6 +28,10 @@ namespace DavidAbarca_Prog2_Final
         public MainWindow()
         {
             InitializeComponent();
+
+            rtbDisplay.Text = "this works";
+
+
         }
     }
 }

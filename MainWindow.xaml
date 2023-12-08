@@ -1,12 +1,47 @@
-﻿<Window x:Class="DavidAbarca_Prog2_Final.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DavidAbarca_Prog2_Final"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+﻿<Window
+    x:Class="DavidAbarca_Prog2_Final.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:DavidAbarca_Prog2_Final"
+    mc:Ignorable="d"
+    Title="MainWindow"
+    Height="450"
+    Width="800">
+    <Canvas>
+        <ComboBox
+            Canvas.Left="64"
+            Canvas.Top="58"
+            Width="174"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" />
+        <ListView
+            Height="230"
+            Width="226"
+            d:ItemsSource="{d:SampleData ItemCount=5}"
+            Canvas.Top="153"
+            Canvas.Left="64"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <RichTextBox
+            Height="240"
+            Width="408"
+            Canvas.Left="365"
+            Canvas.Top="143">
+            <FlowDocument>
+                <Paragraph>
+                    <Run
+                        x:Name="rtbDisplay" />
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
 
-    </Grid>
+    </Canvas>
 </Window>
