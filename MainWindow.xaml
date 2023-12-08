@@ -102,15 +102,71 @@
             Canvas.Left="93"
             Canvas.Top="330" />
         <RichTextBox
-            Height="434"
-            Width="800">
+            Height="60"
+            Width="186"
+            Canvas.Left="35"
+            Canvas.Top="361"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center">
             <FlowDocument>
                 <Paragraph>
                     <Run
-                        Text="RichTextBox" />
+                        x:Name="rtbDescription" />
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
+        <CheckBox
+            x:Name="cbHigh"
+            Content="High Importance"
+            Canvas.Left="243"
+            Canvas.Top="313" />
+        <CheckBox
+            x:Name="cbTime"
+            Content="Time Sensitve"
+            Canvas.Left="375"
+            Canvas.Top="313" />
+        <Button
+            x:Name="btnAddToList"
+            Content="Add To List"
+            Canvas.Left="283"
+            Canvas.Top="346"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Width="163"
+            Click="btnAddToList_Click" />
+        <Button
+            x:Name="btnUpdate"
+            Content="Update Selected Item"
+            Canvas.Left="283"
+            Canvas.Top="371"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Width="163"
+            Click="btnUpdate_Click" />
+        <Button
+            x:Name="btnClear"
+            Content="Clear Boxes"
+            Canvas.Left="283"
+            Canvas.Top="396"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Width="163"
+            Click="btnClear_Click" />
+        <RadioButton
+            x:Name="rdbComplete"
+            Content="Completed"
+            Canvas.Left="527"
+            Canvas.Top="371"
+            GroupName="complete" />
+        <RadioButton
+            x:Name="rdbNotComplete"
+            Content="Not Complete"
+            Canvas.Left="641"
+            Canvas.Top="371"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            GroupName="complete" />
+
 
     </Canvas>
 </Window>

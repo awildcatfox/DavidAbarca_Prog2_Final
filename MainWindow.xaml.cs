@@ -54,7 +54,7 @@ namespace DavidAbarca_Prog2_Final
 
             int selectedIndex = lvTasks.SelectedIndex;
 
-            selectedItem = selectedCategory.Tasks[selectedIndex];
+            selectedItem = selectedCategory.Tasks[0];
 
 
 
@@ -154,6 +154,100 @@ namespace DavidAbarca_Prog2_Final
             {
                 MessageBox.Show("Please enter a category name.");
             }
+        }
+
+        private void btnAddToList_Click(object sender, RoutedEventArgs e)
+        {
+            string newTask = txtTask.Text.Trim();
+            string newDescription;
+
+            TextRange textRange = new TextRange(rtbDescription.ContentStart, rtbDescription.ContentEnd);
+            using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+            {
+                textRange.Save(ms, DataFormats.Text);
+                newDescription = ms.ToArray().Length == 0 ? string.Empty : System.Text.Encoding.Default.GetString(ms.ToArray());
+            }
+
+            newDescription = newDescription.Trim();
+            bool highImportance = cbHigh.IsChecked ?? false;
+            bool timeSensitive = cbTime.IsChecked ?? false;
+            bool completed = rdbComplete.IsChecked ?? false;
+
+            if (!string.IsNullOrEmpty(newTask))
+            {
+                // Add the new task to the selected category
+                selectedCategory?.AddItem(new Tasks(completed, newTask, highImportance, timeSensitive, newDescription));
+
+                // Refresh the ListView by resetting its ItemsSource
+                lvTasks.ItemsSource = null;
+                lvTasks.ItemsSource = selectedCategory?.Tasks;
+
+                // Clear the input controls for the next input
+                txtTask.Clear();
+
+                cbHigh.IsChecked = false;
+                cbTime.IsChecked = false;
+                rdbComplete.IsChecked = false;
+                rdbNotComplete.IsChecked = false;
+            }
+            else
+            {
+                MessageBox.Show("Please enter a task name.");
+            }
+        }
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            if (lvTasks.SelectedItems.Count > 0)
+            {
+                foreach (var selectedItem in lvTasks.SelectedItems)
+                {
+                    if (selectedItem is Tasks selectedTask)
+                    {
+                        // Update task properties based on user input
+                        selectedTask.Name = txtTask.Text.Trim();
+
+                        // Get the new description from the RichTextBox
+                        string newDescription = new TextRange(rtbDescription.ContentStart, rtbDescription.ContentEnd).Text.Trim();
+                        selectedTask.Description = newDescription;
+
+                        // Get the values of checkboxes and radio buttons
+                        cbHigh.IsChecked.GetValueOrDefault();
+                        cbTime.IsChecked.GetValueOrDefault();
+                        rdbComplete.IsChecked.GetValueOrDefault();
+                    }
+                }
+
+                // Refresh the ListView by resetting its ItemsSource
+                lvTasks.ItemsSource = null;
+                lvTasks.ItemsSource = selectedCategory?.Tasks;
+
+                // Clear input controls for the next input
+                txtTask.Clear();
+
+                cbHigh.IsChecked = false;
+                cbTime.IsChecked = false;
+                rdbComplete.IsChecked = false;
+                rdbNotComplete.IsChecked = false;
+            }
+            else
+            {
+                MessageBox.Show("Please select a task to update.");
+            }
+        }
+
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            // Clear the selected item in the ListView
+            lvTasks.SelectedIndex = -1;
+
+            // Clear input controls
+            txtTask.Clear();
+            
+            cbHigh.IsChecked = false;
+            cbTime.IsChecked = false;
+            rdbComplete.IsChecked = false;
+            rdbNotComplete.IsChecked = false;
         }
     }
 }
