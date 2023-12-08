@@ -25,7 +25,11 @@ namespace DavidAbarca_Prog2_Final
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Tasks> _tasks;
+
+        List<Categories> _categories;
+
+        Tasks selectedItem;
+        Categories selectedCategory;
 
 
         public MainWindow()
@@ -33,9 +37,11 @@ namespace DavidAbarca_Prog2_Final
             InitializeComponent();
             Preload();
 
-            lvTasks.ItemsSource = _tasks;
+            cmbCategories.ItemsSource = _categories;
 
-            rtbDisplay.Text = _tasks[0].DisplayInformation();
+            //lvTasks.ItemsSource = _tasks;
+
+            //rtbDisplay.Text = _tasks[0].DisplayInformation();
 
 
 
@@ -48,7 +54,20 @@ namespace DavidAbarca_Prog2_Final
 
             int selectedIndex = lvTasks.SelectedIndex;
 
-            rtbDisplay.Text = _tasks[selectedIndex].DisplayInformation();
+            selectedItem = selectedCategory.Tasks[selectedIndex];
+
+
+
+            //selectedItem = _tasks[selectedIndex];
+
+
+            if (selectedItem != null)
+            {
+                rtbDisplay.Text = selectedItem.DisplayInformation();
+
+
+            }
+
 
 
 
@@ -57,31 +76,84 @@ namespace DavidAbarca_Prog2_Final
 
         public void Preload()
         {
-            _tasks = new List<Tasks>()
-            {
-                 new Tasks(false, "Practice Basic Moves", true, true, "Master fundamental moves for your character"),
-                new Tasks(false, "Learn Combos", true, true, "Practice and memorize effective combos"),
-                new Tasks(false, "Study Frame Data", true, true, "Understand frame advantage and disadvantage"),
-                new Tasks(false, "Character Matchups", true, true, "Study and learn matchups against other characters"),
-                new Tasks(false, "Anti-Air Training", true, true, "Improve anti-air reactions and consistency"),
-                new Tasks(false, "Blocking Practice", true, true, "Enhance defensive skills and blocking"),
-                new Tasks(false, "Tech Throws", true, true, "Practice throw teching and throw baits"),
-                new Tasks(false, "Footsies Training", true, true, "Improve spacing and footsies in neutral"),
-                new Tasks(false, "Punish Training", true, true, "Learn and practice punishing opponent mistakes"),
-                new Tasks(false, "Execution Practice", true, true, "Refine execution of special moves and combos"),
-                new Tasks(false, "Watch Pro Matches", true, true, "Analyze matches of top Street Fighter players"),
-                new Tasks(false, "Frame Trap Training", true, true, "Master frame traps and pressure tactics"),
-                new Tasks(false, "Reversal Timing", true, true, "Practice safe and effective reversals"),
-                new Tasks(false, "Adaptability Training", true, true, "Develop adaptability to different playstyles"),
-                new Tasks(false, "Participate in Local Tournaments", true, true, "Gain tournament experience"),
-                new Tasks(false, "Study Your Replays", true, true, "Review and analyze your own gameplay"),
-                new Tasks(false, "Learn Advanced Techniques", true, true, "Master advanced character-specific techniques"),
-                new Tasks(false, "Mindset and Mental Toughness", true, true, "Develop a strong competitive mindset"),
-                new Tasks(false, "Networking with Players", true, true, "Connect with other players for practice and advice"),
-                new Tasks(false, "Stay Updated on Patch Changes", true, true, "Keep track of game updates and changes")
-            };
+
+            _categories = new List<Categories>();
+
+            // Index 0
+            _categories.Add(new Categories("Training Mode"));
+            _categories[0].AddItem(new Tasks(false, "Practice Basic Moves", true, true, "Master fundamental moves for your character"));
+            _categories[0].AddItem(new Tasks(false, "learn combos", true, true, "practice and memorize effective combos"));
+            _categories[0].AddItem(new Tasks(false, "anti-air training", true, true, "improve anti-air reactions and consistency"));
+            _categories[0].AddItem(new Tasks(false, "blocking practice", true, true, "enhance defensive skills and blocking"));
+            _categories[0].AddItem(new Tasks(false, "tech throws", true, true, "practice throw teching and throw baits"));
+            _categories[0].AddItem(new Tasks(false, "footsies training", true, true, "improve spacing and footsies in neutral"));
+            _categories[0].AddItem(new Tasks(false, "punish training", true, true, "learn and practice punishing opponent mistakes"));
+            _categories[0].AddItem(new Tasks(false, "execution practice", true, true, "refine execution of special moves and combos"));
+            _categories[0].AddItem(new Tasks(false, "frame trap training", true, true, "master frame traps and pressure tactics"));
+            _categories[0].AddItem(new Tasks(false, "reversal timing", true, true, "practice safe and effective reversals"));
+            _categories[0].AddItem(new Tasks(false, "adaptability training", true, true, "develop adaptability to different playstyles"));
+            _categories[0].AddItem(new Tasks(false, "learn advanced techniques", true, true, "master advanced character-specific techniques"));
+
+
+
+
+            // Index 1
+            _categories.Add(new Categories("Vod Review"));
+            _categories[1].AddItem(new Tasks(false, "study frame data", true, true, "understand frame advantage and disadvantage"));
+            _categories[1].AddItem(new Tasks(false, "character matchups", true, true, "study and learn matchups against other characters"));
+            _categories[1].AddItem(new Tasks(false, "watch pro matches", true, true, "analyze matches of top street fighter players"));
+            _categories[1].AddItem(new Tasks(false, "study your replays", true, true, "review and analyze your own gameplay"));
+
+            // Index 2
+            _categories.Add(new Categories("Perspective"));
+            _categories[2].AddItem(new Tasks(false, "participate in local tournaments", true, true, "gain tournament experience"));
+            _categories[2].AddItem(new Tasks(false, "mindset and mental toughness", true, true, "develop a strong competitive mindset"));
+            _categories[2].AddItem(new Tasks(false, "networking with players", true, true, "connect with other players for practice and advice"));
+            _categories[2].AddItem(new Tasks(false, "stay updated on patch changes", true, true, "keep track of game updates and changes"));
+
+
+
+            //_tasks = new list<tasks>()
+            //{
+
+
+
+            //};
         }// preload
 
-      
+        private void cmbCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // getting the selected index of the category
+            int ctgIndex = cmbCategories.SelectedIndex;
+
+            // Getting the selected Category
+            selectedCategory = _categories[ctgIndex];
+
+            // assigning the Task ti the list view
+            lvTasks.ItemsSource = selectedCategory.Tasks;
+
+        }// cmbCategories
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            string newCategory = txtCategory.Text.Trim();
+
+            if (!string.IsNullOrEmpty(newCategory))
+            {
+                // Add the new category to the existing collection
+                _categories.Add(new Categories(newCategory));
+
+                // Refresh the ComboBox by resetting its ItemsSource
+                cmbCategories.ItemsSource = null;  // Resetting the ItemsSource
+                cmbCategories.ItemsSource = _categories;  // Setting it back to the updated collection
+
+                // Clear the TextBox for the next input
+                txtCategory.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Please enter a category name.");
+            }
+        }
     }
 }

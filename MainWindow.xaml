@@ -11,20 +11,22 @@
     Width="800">
     <Canvas>
         <ComboBox
-            Canvas.Left="64"
-            Canvas.Top="58"
+            x:Name="cmbCategories"
+            Canvas.Left="25"
+            Canvas.Top="28"
             Width="174"
             HorizontalAlignment="Left"
-            VerticalAlignment="Center" />
+            VerticalAlignment="Top"
+            SelectionChanged="cmbCategories_SelectionChanged" />
         <ListView
             x:Name="lvTasks"
             Height="230"
-            Width="375"
+            Width="455"
             d:ItemsSource="{d:SampleData ItemCount=5}"
-            Canvas.Top="153"
+            Canvas.Top="73"
             Canvas.Left="25"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
             SelectionChanged="lvTasks_SelectionChanged">
             <ListView.View>
                 <GridView>
@@ -47,16 +49,65 @@
             </ListView.View>
         </ListView>
         <RichTextBox
-            Height="240"
-            Width="266"
-            Canvas.Left="507"
-            Canvas.Top="143"
+            Height="323"
+            Width="259"
+            Canvas.Left="512"
+            Canvas.Top="28"
             HorizontalAlignment="Left"
-            VerticalAlignment="Center">
+            VerticalAlignment="Top">
             <FlowDocument>
                 <Paragraph>
                     <Run
                         x:Name="rtbDisplay" />
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <Label
+            x:Name="lblNewCategory"
+            Content="New Category"
+            Canvas.Left="262"
+            Canvas.Top="10"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Width="104" />
+        <TextBox
+            x:Name="txtCategory"
+            Canvas.Left="262"
+            TextWrapping="Wrap"
+            Canvas.Top="39"
+            Width="129"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" />
+        <Button
+            x:Name="btnAdd"
+            Content="Add"
+            Canvas.Left="412"
+            Canvas.Top="23"
+            Height="34"
+            Width="68"
+            Click="btnAdd_Click" />
+        <Label
+            x:Name="lblTask"
+            Content="Task"
+            Canvas.Left="25"
+            Canvas.Top="308" />
+        <TextBox
+            x:Name="txtTask"
+            Canvas.Left="62"
+            TextWrapping="Wrap"
+            Canvas.Top="312"
+            Width="120" />
+        <Label
+            Content="Description"
+            Canvas.Left="93"
+            Canvas.Top="330" />
+        <RichTextBox
+            Height="434"
+            Width="800">
+            <FlowDocument>
+                <Paragraph>
+                    <Run
+                        Text="RichTextBox" />
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
