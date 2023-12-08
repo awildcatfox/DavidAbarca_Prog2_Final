@@ -17,6 +17,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Center" />
         <ListView
+            x:Name="lvTasks"
             Height="230"
             Width="226"
             d:ItemsSource="{d:SampleData ItemCount=5}"
@@ -26,7 +27,10 @@
             VerticalAlignment="Center">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn />
+                    <GridViewColumn 
+                        Header="Complete"
+                        DisplayMemberBinding="{Binding Complete}"
+                        />
                 </GridView>
             </ListView.View>
         </ListView>
